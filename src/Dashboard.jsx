@@ -1,4 +1,8 @@
 import { useState } from "react";
+import CreditCheckLogo from "./CreditCheckLogo";
+import ClovrLabsLogo from "./ClovrLabsLogo";
+
+const BRAND_BLUE = "#005EFF";
 
 const data = {
   period: "20 Feb – 25 Mar 2026 (34 days)",
@@ -48,11 +52,13 @@ const StatCard = ({ label, value, sub, accent }) => (
     style={{
       background: "var(--bg-card, #ffffff)",
       border: "1px solid var(--border, #e5e7eb)",
-      borderRadius: 12,
+      borderRadius: 14,
       padding: "20px 24px",
       flex: "1 1 200px",
       minWidth: 180,
       borderTop: accent ? `3px solid ${accent}` : undefined,
+      boxShadow: "0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02)",
+      transition: "box-shadow 0.2s ease",
     }}
   >
     <div
@@ -154,30 +160,89 @@ export default function Dashboard() {
       style={{
         fontFamily:
           "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-        maxWidth: 720,
+        maxWidth: 760,
         margin: "0 auto",
-        padding: 16,
+        padding: "0 20px 40px",
       }}
     >
-      <div style={{ marginBottom: 20 }}>
-        <h1
-          style={{
-            fontSize: 22,
-            fontWeight: 700,
-            color: "var(--text-primary, #111827)",
-            margin: 0,
-          }}
-        >
-          CreditCheck — Campaign Performance
-        </h1>
+      {/* Branded Header */}
+      <div
+        style={{
+          background: "linear-gradient(135deg, #0A1264 0%, #005EFF 100%)",
+          borderRadius: "0 0 20px 20px",
+          padding: "28px 32px 24px",
+          marginBottom: 28,
+          marginLeft: -20,
+          marginRight: -20,
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        {/* Subtle pattern overlay */}
         <div
           style={{
-            fontSize: 13,
-            color: "var(--text-muted, #6b7280)",
-            marginTop: 4,
+            position: "absolute",
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
+            opacity: 0.06,
+            backgroundImage:
+              "radial-gradient(circle at 80% 20%, #fff 1px, transparent 1px), radial-gradient(circle at 20% 80%, #fff 1px, transparent 1px)",
+            backgroundSize: "40px 40px",
+          }}
+        />
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            position: "relative",
+            flexWrap: "wrap",
+            gap: 12,
           }}
         >
-          creditchecker.io · {data.period}
+          <div>
+            <CreditCheckLogo height={26} color="#ffffff" />
+            <div
+              style={{
+                fontSize: 18,
+                fontWeight: 600,
+                color: "#ffffff",
+                marginTop: 12,
+                letterSpacing: "-0.01em",
+              }}
+            >
+              Campaign Performance Report
+            </div>
+            <div
+              style={{
+                fontSize: 13,
+                color: "rgba(255,255,255,0.7)",
+                marginTop: 4,
+              }}
+            >
+              {data.period}
+            </div>
+          </div>
+          <div
+            style={{
+              background: "rgba(255,255,255,0.12)",
+              borderRadius: 10,
+              padding: "10px 16px",
+              backdropFilter: "blur(8px)",
+              textAlign: "center",
+            }}
+          >
+            <div
+              style={{ fontSize: 28, fontWeight: 700, color: "#fff", lineHeight: 1.1 }}
+            >
+              1.079
+            </div>
+            <div style={{ fontSize: 11, color: "rgba(255,255,255,0.7)", marginTop: 2 }}>
+              total leads
+            </div>
+          </div>
         </div>
       </div>
 
@@ -207,7 +272,7 @@ export default function Dashboard() {
               border: "none",
               borderBottom:
                 tab === t.id
-                  ? "2px solid var(--text-primary, #111827)"
+                  ? `2px solid ${BRAND_BLUE}`
                   : "2px solid transparent",
               cursor: "pointer",
               marginBottom: -1,
@@ -645,6 +710,35 @@ export default function Dashboard() {
           </div>
         </>
       )}
+
+      {/* Footer */}
+      <div
+        style={{
+          marginTop: 40,
+          paddingTop: 20,
+          borderTop: "1px solid var(--border, #e5e7eb)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          flexWrap: "wrap",
+          gap: 8,
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 6,
+            fontSize: 11,
+            color: "var(--text-muted, #9ca3af)",
+          }}
+        >
+          Prepared by <ClovrLabsLogo height={14} color="#9ca3af" />
+        </div>
+        <div style={{ fontSize: 11, color: "var(--text-muted, #9ca3af)" }}>
+          Confidential — Internal use only
+        </div>
+      </div>
     </div>
   );
 }
